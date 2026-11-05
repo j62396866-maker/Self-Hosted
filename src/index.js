@@ -27,7 +27,7 @@ async function startFNLB() {
 			? 32
 			: parseInt(process.env.BOTS_PER_SHARD),
 		categories: parseListEnv(process.env.CATEGORIES),
-		bots: parseListEnv(process.env.BOTS)
+		bots: parseListEnv(process.env.BOTS) || ['Character_FeelUnionSki', 'Character_JadeTowelGloss']
 	});
 }
 
