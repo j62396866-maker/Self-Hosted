@@ -1,6 +1,17 @@
 import 'dotenv/config';
 import FNLB from 'fnlb';
+import http from 'http';
 
+// 1. Crée un mini serveur HTTP pour que l'hébergeur valide le port 3000 / PORT
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+	res.writeHead(200, { 'Content-Type': 'text/plain' });
+	res.end('Bot is running!\n');
+}).listen(PORT, () => {
+	console.log(`[HTTP] Serveur de santé en écoute sur le port ${PORT}`);
+});
+
+// 2. Lancement normal de FNLB
 const fnlb = new FNLB({
 	clusterName: process.env.CLUSTER_NAME || 'Self Hosted Cluster'
 });
@@ -33,9 +44,7 @@ async function startFNLB() {
 
 async function restartFNLB() {
 	console.log('Restarting FNLB...');
-
 	await fnlb.stop();
-
 	await startFNLB();
 }
 
